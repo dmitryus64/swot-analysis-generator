@@ -85,18 +85,14 @@ def main():
     st.markdown(
         """
         <style>
-        /* Hide the slider's minimum and maximum values */
-        div[data-testid="stSliderTickBarMin"],
-        div[data-testid="stSliderTickBarMax"] {
+        [data-testid="stTickBarMin"],
+        [data-testid="stTickBarMax"] {
             opacity: 0;
             transition: opacity 0.2s ease-in-out;
         }
 
-        /* Show the values when hovering over a specific slider */
-        div[data-testid="stSlider"]:hover
-        div[data-testid="stSliderTickBarMin"],
-        div[data-testid="stSlider"]:hover
-        div[data-testid="stSliderTickBarMax"] {
+        [data-testid="stSlider"]:hover [data-testid="stTickBarMin"],
+        [data-testid="stSlider"]:hover [data-testid="stTickBarMax"] {
             opacity: 1;
         }
         </style>
