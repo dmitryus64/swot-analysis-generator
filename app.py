@@ -224,9 +224,10 @@ def main():
             text-align: center;
         }}
 
+        .swot-table td:nth-child(4),
         .swot-table td:nth-child(5),
         .swot-table td:nth-child(6) {{
-            text-align: right;
+            text-align: center;
         }}
         </style>
 
