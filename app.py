@@ -153,14 +153,66 @@ def main():
             "impact_prob": "Priority Score (Impact x Probability)"
         })
 
-        # Displaying the results table
-        st.table(
-            df_display.style.format({
-                "Probability": "{:.1f}",
-                "Priority Score (Impact x Probability)": "{:.1f}"
-            }),
-            hide_index=True
+        # Copy the table
+        table_df = df_display.copy()
+
+        # Reset the pandas index
+        table_df = table_df.reset_index(drop=True)
+
+        # Generate HTML without the index
+        table_html = table_df.to_html(
+            index=False,
+            formatters={
+                "Probability": lambda value: f"{value:.1f}",
+                "Priority Score (Impact x Probability)": lambda value: f"{value:.1f}"
+            },
+            border=0,
+            classes="swot-table"
         )
+
+        # Add visible borders and styling
+        table_html = f"""
+        <style>
+        .swot-table {{
+            width: 100%;
+            border-collapse: collapse;
+            border: 2px solid #555555;
+            font-size: 14px;
+        }}
+
+        .swot-table th,
+        .swot-table td {{
+            border: 1px solid #777777;
+            padding: 8px;
+        }}
+
+        .swot-table th {{
+            background-color: #e9ecef;
+            color: #000000;
+            font-weight: bold;
+            text-align: center;
+        }}
+
+        .swot-table td {{
+            background-color: white;
+            color: #000000;
+        }}
+
+        .swot-table td:first-child {{
+            text-align: center;
+        }}
+
+        .swot-table td:nth-child(5),
+        .swot-table td:nth-child(6) {{
+            text-align: right;
+        }}
+        </style>
+
+        {table_html}
+        """
+
+        # Displaying the HTML table
+        st.html(table_html)
 
         # Displaying the scatterplot chart with Rank
         fig = go.Figure()
