@@ -81,6 +81,28 @@ def convert_to_xlsx(df):
 def main():
     """The main function that runs the Streamlit application."""
     st.set_page_config(page_title="SWOT Analysis Generator", page_icon="🔎", layout="wide")
+    
+    st.markdown(
+        """
+        <style>
+        /* Hide the slider's minimum and maximum values */
+        div[data-testid="stSliderTickBarMin"],
+        div[data-testid="stSliderTickBarMax"] {
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        /* Show the values when hovering over a specific slider */
+        div[data-testid="stSlider"]:hover
+        div[data-testid="stSliderTickBarMin"],
+        div[data-testid="stSlider"]:hover
+        div[data-testid="stSliderTickBarMax"] {
+            opacity: 1;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
     initialize_session_state()
 
