@@ -409,8 +409,36 @@ def main():
         st.subheader("Recommendations for Interpreting the Results")
         st.table(advice_df)
 
+        # --- Rating block after recommendations table ---
+        show_rating_block()
+
     else:
         st.info("Add some factors to see the results of the analysis.")
+
+def show_rating_block():
+    """Displays a native Streamlit star rating block at the bottom of the main page."""
+    st.markdown("---")
+    st.markdown("**Rate us:**")
+
+    rating = st.radio(
+        "Choose a rating:",
+        options=[1, 2, 3, 4, 5],
+        format_func=lambda x: "⭐" * x,
+        horizontal=True,
+        key="service_rating",
+        label_visibility="collapsed"
+    )
+
+    if rating == 1 or rating == 2 or rating == 3:
+        url = "https://docs.google.com/forms/d/e/1FAIpQLSd9JiP4ol726UXqB2r22ZA_9dYV4MS01ZN32RXPn36BtpHa8A/viewform"
+    else:
+        url = "https://chromewebstore.google.com/detail/gmamgipckkcahmnmcoejpcmcicmcdenk/reviews"
+
+    st.link_button(
+        "Leave feedback",
+        url=url,
+        use_container_width=False
+    )
 
 if __name__ == "__main__":
     main()
